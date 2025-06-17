@@ -53,7 +53,7 @@ public class principal {
             if (resultado != null) {
                 System.out.println("Resultado: " + resultado);
             }
-            System.out.println("******************************************************************");
+            System.out.println("*****************************************************************");
 
 
         } while (op1 >= 1 && op1 <= 6 && op2 >= 1 && op2 <= 6);
