@@ -56,7 +56,7 @@ public class principal {
             System.out.println("*****************************************************************");
 
 
-        } while (op1 >= 1 && op1 <= 6 && op2 >= 1 && op2 <= 6);
+        } while (op1 > 1 && op1 < 6 && op2 > 1 && op2 < 6);
 
         System.out.println("Gracias por usar el conversor de monedas =)");
     }
