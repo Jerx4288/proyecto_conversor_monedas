@@ -17,7 +17,7 @@ public class Conexion
             .setPrettyPrinting()
             .create();
 
-    public Moneda consultarCambio(String base, String destino)
+    public Moneda consultarCambio(String base, String destino, double monto)
     {
         String url ="https://v6.exchangerate-api.com/v6/15b3890126b0f9b622852c90/latest/" + base.replace(" ","+");
         try{
@@ -27,17 +27,19 @@ public class Conexion
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             String json = response.body();
-            System.out.println("Json Recibido:\n" + json);
+
+            //System.out.println("Json Recibido:\n" + json);
 
             JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
             JsonObject rates = jsonObject.getAsJsonObject("conversion_rates");
 
             if (rates.has(destino.toUpperCase())) {
                 double valor = rates.get(destino.toUpperCase()).getAsDouble();
-
+                double resultado = valor * monto;
                 Moneda moneda = new Moneda();
                 moneda.setTipo(base.toUpperCase() + "/" + destino.toUpperCase());
                 moneda.setValor(valor);
+                moneda.setResultado(resultado);
                 return moneda;
             } else {
                 System.out.println("No se encontró el tipo de cambio para " + destino);
